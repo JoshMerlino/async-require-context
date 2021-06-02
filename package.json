@@ -1,6 +1,6 @@
 {
     "name": "async-require-context",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A rewritten version of @wilsonlewis' require-context package that utilizes modern technologies.",
     "main": "lib/",
     "types": "lib/",
@@ -12,7 +12,7 @@
         "dev": "concurrently \"npm:watch-*\"",
         "start": "node .",
         "build": "tsc",
-		"prepare": "npm run build; npm test"
+        "prepare": "npm run build; npm test"
     },
     "devDependencies": {
         "@types/node": "^15.6.1",
