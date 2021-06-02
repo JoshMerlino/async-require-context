@@ -12,6 +12,7 @@
         "dev": "concurrently \"npm:watch-*\"",
         "start": "node .",
         "build": "tsc",
+		"test": "echo \"Error: no test specified\"",
         "prepare": "npm run build; npm test"
     },
     "devDependencies": {
