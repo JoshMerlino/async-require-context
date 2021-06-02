@@ -1,4 +1,7 @@
 node_modules/
 src/
+.git/
+.github/
+.eslint*
 .env
 *.js.map
