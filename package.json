@@ -1,7 +1,7 @@
 {
-    "name": "ts-package",
-    "version": "1.0.30",
-    "description": "Easily create Typescript node.js packages from this boilerplate",
+    "name": "async-require-context",
+    "version": "1.0.0",
+    "description": "A rewritten version of @wilsonlewis' require-context package that utilizes modern technologies.",
     "main": "lib/",
     "types": "lib/",
     "author": "Josh Merlino",
@@ -11,7 +11,8 @@
         "watch-js": "nodemon .",
         "dev": "concurrently \"npm:watch-*\"",
         "start": "node .",
-        "build": "tsc"
+        "build": "tsc",
+		"prepare": "npm run build; npm test"
     },
     "devDependencies": {
         "@types/node": "^15.6.1",
@@ -24,7 +25,5 @@
         "typescript": "^4.3.2",
         "typescript-eslint": "0.0.1-alpha.0"
     },
-    "dependencies": {
-        "dotenv": "^10.0.0"
-    }
+    "dependencies": {}
 }
