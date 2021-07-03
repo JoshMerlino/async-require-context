@@ -27,7 +27,7 @@ asyncRequireContext(path, recursive, pattern);
 | `pattern` | [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) | `/\.js$/` | Specifies a filter that files must match. |
 
 ### Returns
-asyncRequireContext will always return `Promise<Context>`, if your using type annotations, it will be `Promise<Context<Type>>`
+asyncRequireContext will always return `Promise<Context[]>`, if your using type annotations, it will be `Promise<Context<Type>[]>`
 
 The `Context` structure is:
 ```ts
