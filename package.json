@@ -1,6 +1,6 @@
 {
     "name": "async-require-context",
-    "version": "1.8.4",
+    "version": "1.8.5",
     "description": "A rewritten version of @wilsonlewis' require-context package that utilizes modern technologies.",
     "main": "lib/",
     "types": "lib/",
