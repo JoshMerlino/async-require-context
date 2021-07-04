@@ -34,6 +34,6 @@ The `Context` structure is:
 {
 	name: string, // Name of the module.
 	path: string, // Full path of the module.
-	module: require(module) // The module as if it was required with `require`. This may be any shape depending on if you use type annotations.
+	module: require(path) // The module as if it was required with `require`. This may be any shape depending on if you use type annotations.
 }
 ```
