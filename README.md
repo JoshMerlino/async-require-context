@@ -11,6 +11,8 @@
 
 A rewritten version of [@wilsonlewis' require-context](https://www.npmjs.com/package/require-context) package that utilizes modern technologies.
 
+> This module is **not** a drop in replacement for [require-context](https://www.npmjs.com/package/require-context).
+
 ### Getting started
 ```bash
 npm install --save async-require-context
