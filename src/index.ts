@@ -11,46 +11,59 @@ export interface Context<Module> {
 // Function to get a context of every API in the folder.
 export default async function asyncRequireContext<Module = any>(dir: string, recurse = true, pattern = /\.js$/): Promise<Context<Module>[]> {
 
-	// Scan directory.
-	const files = await readdir(dir);
+	// Attempt to require the modules.
+	try {
 
-	// Initialize array of contexts.
-	const contexts: Context<Module>[] = [];
+		// Scan directory.
+		const files = await readdir(dir);
 
-	// Iterate through files.
-	for (const name of files) {
+		// Initialize array of contexts.
+		const contexts: Context<Module>[] = [];
 
-		// Get path of file.
-		const path = join(dir, name);
+		// Iterate through files.
+		for (const name of files) {
 
-		// Get information about the files.
-		const stats = await lstat(path);
-		const isDirectory = stats.isDirectory();
+			// Get path of file.
+			const path = join(dir, name);
 
-		// If its a directory and we want to recurse...
-		if (isDirectory && recurse) {
+			// Get information about the files.
+			const stats = await lstat(path);
+			const isDirectory = stats.isDirectory();
 
-			// Push subfolder of contexts.
-			contexts.push(...await asyncRequireContext<Module>(path));
+			// If its a directory and we want to recurse...
+			if (isDirectory && recurse) {
 
-			// Continue to next iteration
-			continue;
+				// Push subfolder of contexts.
+				contexts.push(...await asyncRequireContext<Module>(path));
+
+				// Continue to next iteration
+				continue;
+
+			}
+
+			// If does not match filter.
+			if (!pattern.test(path)) continue;
+
+			// Push the module to contexts.
+			contexts.push(<Context<Module>>{
+				name,
+				path,
+				module: require(resolve(path))
+			});
 
 		}
 
-		// If does not match filter.
-		if (!pattern.test(path)) continue;
+		// Return all contexts!
+		return contexts;
 
-		// Push the module to contexts.
-		contexts.push(<Context<Module>>{
-			name,
-			path,
-			module: require(resolve(path))
-		});
+	} catch (error: any) {
+
+		// If the folder wasnt found, just return empty array
+		if (error && error.errno === -2) return [];
+
+		// Throw the error
+		throw error;
 
 	}
-
-	// Return all contexts!
-	return contexts;
 
 }
