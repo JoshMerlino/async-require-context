@@ -2,7 +2,7 @@
 /* eslint no-new: off */
 
 import path from "path";
-import asyncRequireContext from "../lib/esm";
+import asyncRequireContext from "../src";
 
 test("Ensure the store can determine its age.", async () => {
 
