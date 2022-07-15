@@ -4,6 +4,10 @@
     "description": "A rewritten version of @wilsonlewis' require-context package that utilizes modern technologies.",
     "main": "lib/",
     "types": "lib/",
+    "exports": {
+        "import": "./lib/esm/index.js",
+        "require": "./lib/cjs/index.js"
+    },
     "author": "Josh Merlino",
     "license": "ISC",
     "scripts": {
@@ -11,7 +15,7 @@
         "watch-js": "nodemon .",
         "dev": "concurrently \"npm:watch-*\"",
         "start": "node .",
-        "build": "tsc",
+        "build": "tsc && tsc -p tsconfig.cjs.json",
         "test": "jest",
         "prepare": "npm run build; npm test"
     },

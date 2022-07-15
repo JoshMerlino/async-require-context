@@ -1,10 +1,10 @@
 {
 	"compilerOptions": {
 		"lib": [ "es2020" ],
-		"module": "commonjs",
-		"target": "es2020",
+		"module": "esnext",
+		"target": "esnext",
 		"types": [ "node", "jest" ],
-		"outDir": "lib",
+		"outDir": "lib/esm",
 		"jsx": "react",
 		"removeComments": true,
 		"sourceMap": true,
