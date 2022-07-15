@@ -2,8 +2,8 @@
     "name": "async-require-context",
     "version": "1.8.14",
     "description": "A rewritten version of @wilsonlewis' require-context package that utilizes modern technologies.",
-    "main": "lib/",
-    "types": "lib/",
+    "main": "lib/esm",
+    "types": "lib/esm",
     "exports": {
         "import": "./lib/esm/index.js",
         "require": "./lib/cjs/index.js"
