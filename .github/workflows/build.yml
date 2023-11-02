@@ -15,15 +15,15 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [ 16.x, 18.x, 20.x ]
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
 
       - name: Build
         run: |
@@ -32,15 +32,15 @@ jobs:
         
       - name: Configure git user
         run: |
-          hub config --global user.name "github-actions[bot]"
-          hub config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         
       - name: "Push to 'lib' branch"
         run: |
           cd lib
-          hub init -b lib
-          hub add .
-          hub commit -m "Build [Github actions]"
-          hub remote add output https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
-          hub push -fu output lib
+          git init -b lib
+          git add .
+          git commit -m "Build [GitHub actions]"
+          git remote add output https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+          git push -fu output lib
           
