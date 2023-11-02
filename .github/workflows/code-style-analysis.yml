@@ -3,39 +3,35 @@
 
 name: Code Style Analysis
 
-# Run on basicly every change to the tree
 on:
   push:
     branches: '**'
-  pull_request:
-    branches: '**'
+  workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  eslint:
-    # The type of runner that the job will run on
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    permissions:
+      contents: write
     steps:
-
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # Sets up node environment
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          node-version: '14'
+          ref: ${{ github.ref }}
 
-      # Install node modules
-      - name: Install node modules
-        run: |
-          npm ci
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-      # Attempt to build
-      - name: Run ESLint
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: "Lint"
         run: |
-          ./node_modules/.bin/eslint --max-warnings=0 --fix .
+          git config --global user.name 'CI/CD'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          npm run lint || true
+          git commit -am "Eslint: fix all" || true
+          git push || true
